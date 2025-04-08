@@ -4,6 +4,9 @@ import javax.swing.text.DateFormatter;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class UserDAO {
     private Connection conn;
@@ -55,6 +58,24 @@ public class UserDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+
+    public List<CuentaCorriente> listarCuentasCorrientes(int id){
+        List<CuentaCorriente> listaCuentaCorriente = new ArrayList<>();
+        CuentaCorriente cuentaCorriente = null;
+        String sql = "select * from cuentas WHERE id_usuario="+id;
+
+        try(Statement statement = conn.createStatement()){
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()){
+                cuentaCorriente = new CuentaCorriente(rs.getInt("id_cuenta"),rs.getInt("id_usuario"),rs.getDouble("saldo"),rs.getString("fecha_creacion"),rs.getString("tipo"));
+                listaCuentaCorriente.add(cuentaCorriente);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return listaCuentaCorriente;
     }
 
 

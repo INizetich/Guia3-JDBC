@@ -1,7 +1,10 @@
 package org.Nize.Control;
 
+import org.Nize.Models.CuentaCorriente;
 import org.Nize.Models.User;
 import org.Nize.Models.UserDAO;
+
+import java.util.List;
 
 public class UserController {
     private UserDAO userDAO;
@@ -17,5 +20,10 @@ public class UserController {
 
     public User getUser(String dni){
         return userDAO.getUsuario(dni);
+    }
+
+
+    public List<CuentaCorriente> listarCuentasCorrientes(int id){
+        return userDAO.listarCuentasCorrientes(id);
     }
 }
