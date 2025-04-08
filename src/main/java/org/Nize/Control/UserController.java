@@ -13,6 +13,9 @@ public class UserController {
 
     public void insertarUser(User user){
         userDAO.insertarUser(user);
-        userDAO.crearCredenciales(user);
+    }
+
+    public User getUser(String dni){
+        return userDAO.getUsuario(dni);
     }
 }

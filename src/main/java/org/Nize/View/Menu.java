@@ -1,5 +1,6 @@
 package org.Nize.View;
 
+import org.Nize.Control.CredencialesController;
 import org.Nize.Control.UserController;
 import org.Nize.Models.User;
 
@@ -7,14 +8,19 @@ import java.util.Scanner;
 
 public class Menu {
     private UserController userController;
+    private CredencialesController credencialesController;
     private Scanner scanner = new Scanner(System.in);
 
     public Menu() {
         userController = new UserController();
+        credencialesController = new CredencialesController();
     }
 
     public void llamarController() {
-        userController.insertarUser(crearUsuario());
+        User user = crearUsuario();
+        userController.insertarUser(user);
+        user = userController.getUser(user.getDni());
+        credencialesController.crearCredenciales(user);
     }
 
     public User crearUsuario() {
