@@ -9,16 +9,28 @@ public class Conexion {
     private final static String DB_NAME = "railway";
     private final static String USER = "root";
     private final static String PASS = "GyfQLZCHyJOrRYVKQXIwsGXCnndgLYSw";
+     private static Conexion instancia;
+     private Connection connection;
+
+     public Conexion() {
+         try {
+             connection = DriverManager.getConnection(URL+DB_NAME,USER,PASS);
+         } catch (SQLException e) {
+             throw new RuntimeException(e);
+         }
+
+     }
+
+     public static Conexion getInstance(){
+         if(instancia == null){
+             instancia = new Conexion();
+         }
+             return instancia;
+
+     }
+     public Connection getConnection(){
+         return connection;
+     }
 
 
-    public static Connection getConexion(){
-
-        try {
-            return DriverManager.getConnection(URL + DB_NAME + "?useSSL=false&ServerTimezone=UTC", USER,PASS);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-    }
 }

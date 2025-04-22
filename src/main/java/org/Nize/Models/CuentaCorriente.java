@@ -1,23 +1,20 @@
 package org.Nize.Models;
 
-import org.Nize.Imp.TiposCaja;
-
-import java.time.LocalDateTime;
+import org.Nize.Models.Imp.TiposCaja;
 
 public class CuentaCorriente {
     private int id_cuenta;
     private int id_usuario;
     private double saldo;
     private String fecha;
-    private String tiposCaja = TiposCaja.CAJA_AHORRO.toString();
+    private String tiposCaja = TiposCaja.CUENTA_CORRIENTE.toString();
 
 
-    public CuentaCorriente(int id_cuenta, int id_usuario, double saldo, String fecha, String tiposCaja) {
+    public CuentaCorriente(int id_cuenta, int id_usuario, double saldo, String fecha) {
         this.id_cuenta = id_cuenta;
         this.id_usuario = id_usuario;
         this.saldo = saldo;
         this.fecha = fecha;
-        this.tiposCaja = tiposCaja.toString();
     }
 
     public int getId_cuenta() {
@@ -50,6 +47,15 @@ public class CuentaCorriente {
 
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+
+    public String getTiposCaja() {
+        return tiposCaja;
+    }
+
+    public void setTiposCaja(String tiposCaja) {
+        this.tiposCaja = tiposCaja;
     }
 
     @Override

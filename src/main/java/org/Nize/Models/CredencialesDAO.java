@@ -8,7 +8,7 @@ public class CredencialesDAO {
     private Connection conn;
 
     public CredencialesDAO(){
-        this.conn = Conexion.getConexion();
+        this.conn = Conexion.getInstance().getConnection();
     }
 
 
@@ -28,4 +28,8 @@ public class CredencialesDAO {
             System.out.println(e.getMessage());
         }
     }
+
+//    public boolean iniciarSesion(String user, String contraseña){
+//        String sql = "SELECT FROM USUARIOS "
+//    }
 }

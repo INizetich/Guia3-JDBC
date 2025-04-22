@@ -12,10 +12,10 @@ public class UserDAO {
     private Connection conn;
 
     public UserDAO() {
-        this.conn = Conexion.getConexion();
+        this.conn = Conexion.getInstance().getConnection();
     }
 
-    public void insertarUser(User user) {
+    public int insertarUser(User user) {
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime fechaActual = LocalDateTime.now();
         String sql = "INSERT INTO usuarios(nombre,apellido,dni,email,fecha_creacion) VALUES (?,?,?,?,?)";
@@ -30,6 +30,7 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return getIdUsuario(user);
     }
 
     public User getUsuario(String dni){
@@ -38,7 +39,9 @@ public class UserDAO {
         try(Statement statement = conn.createStatement()){
             ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
-                user = new User(rs.getString("nombre"), rs.getString("apellido"), rs.getString("dni"), rs.getString("email"), rs.getString("fecha_creacion"), rs.getInt("id_usuario"));
+                user = new User(rs.getString("nombre"), rs.getString("apellido"), rs.getString("dni"), rs.getString("email"));
+                user.setFecha_Creacion(rs.getString("fecha_creacion"));
+                user.setID_Usuario(rs.getInt("id_usuario"));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -60,23 +63,6 @@ public class UserDAO {
         return 0;
     }
 
-
-    public List<CuentaCorriente> listarCuentasCorrientes(int id){
-        List<CuentaCorriente> listaCuentaCorriente = new ArrayList<>();
-        CuentaCorriente cuentaCorriente = null;
-        String sql = "select * from cuentas WHERE id_usuario="+id;
-
-        try(Statement statement = conn.createStatement()){
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()){
-                cuentaCorriente = new CuentaCorriente(rs.getInt("id_cuenta"),rs.getInt("id_usuario"),rs.getDouble("saldo"),rs.getString("fecha_creacion"),rs.getString("tipo"));
-                listaCuentaCorriente.add(cuentaCorriente);
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return listaCuentaCorriente;
-    }
 
 
 

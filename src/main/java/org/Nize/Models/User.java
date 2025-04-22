@@ -8,17 +8,21 @@ public class User {
     private String email;
     private String fecha_Creacion;
 
-    public User(String nombre, String apellido, String dni, String email, String fecha_Creacion, int ID_Usuario){
+    public User(String nombre, String apellido, String dni, String email){
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.email = email;
-        this.fecha_Creacion = fecha_Creacion;
-        this.ID_Usuario = ID_Usuario;
+        this.fecha_Creacion = null;
+        this.ID_Usuario = -1;
     }
 
     public int getID_Usuario() {
         return ID_Usuario;
+    }
+
+    public void setID_Usuario(int id_usuario){
+        this.ID_Usuario = id_usuario;
     }
 
     public String getApellido() {

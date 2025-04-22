@@ -1,6 +1,6 @@
 package org.Nize.Models;
 
-import org.Nize.Imp.Permisos;
+import org.Nize.Models.Imp.Permisos;
 
 public class Credenciales {
     private int ID_Credencial;

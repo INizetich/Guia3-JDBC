@@ -1,4 +1,4 @@
-package org.Nize.Imp;
+package org.Nize.Models.Imp;
 
 public enum TiposCaja {
     CAJA_AHORRO,
