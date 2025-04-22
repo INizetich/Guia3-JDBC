@@ -13,7 +13,7 @@ public class CuentaCorrienteDAO {
     }
 
     public void insertarCuenta(CuentaCorriente cuentaCorriente, int id_usuario){
-        String sql = "INSERT INTO Cuenta(id_usuario,tipo,saldo,fecha_creacion) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO cuentas(id_usuario,tipo,saldo,fecha_creacion) VALUES(?,?,?,?)";
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime fechaActual = LocalDateTime.now();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
@@ -28,7 +28,7 @@ public class CuentaCorrienteDAO {
     }
 
     public void abrirCajaAhorro(int id_usuario){
-        String sql = "INSERT INTO Cuenta(id_usuario,tipo,saldo,fecha_creacion) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO cuentas(id_usuario,tipo,saldo,fecha_creacion) VALUES(?,?,?,?)";
         DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime fechaActual = LocalDateTime.now();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){

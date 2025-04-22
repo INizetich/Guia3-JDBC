@@ -10,7 +10,7 @@ public class CredencialesController {
         credencialesDAO = new CredencialesDAO();
     }
 
-    public void crearCredenciales(User user){
-        credencialesDAO.crearCredenciales(user);
+    public void crearCredenciales(User user, int id){
+        credencialesDAO.crearCredenciales(user, id);
     }
 }

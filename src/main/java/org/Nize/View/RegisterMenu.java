@@ -68,7 +68,6 @@ public class RegisterMenu {
         CredencialesController ccontroller = new CredencialesController();
         User user = formUsuario();
         int id = userController.insertarUser(user);
-        ccontroller.crearCredenciales(user);
         cuentacontroller.abrirCajaAhorro(id);
     }
 
