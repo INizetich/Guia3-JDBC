@@ -27,10 +27,11 @@ public class UserDAO {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, fechaActual.format(formateador));
             preparedStatement.executeUpdate();
+            return getIdUsuario(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return getIdUsuario(user);
+        return -1;
     }
 
     public User getUsuario(String dni){

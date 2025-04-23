@@ -44,7 +44,7 @@ public class RegisterMenu {
         System.out.println("------Gestión App------");
         System.out.println("1- Iniciar Sesión");
         System.out.println("2- Registrarse");
-        System.out.println("\n 0- Salir");
+        System.out.println("\n0- Salir");
     }
 
     private static User formUsuario() {
@@ -64,11 +64,8 @@ public class RegisterMenu {
 
     private static void registarUsuario() {
         UserController userController = new UserController();
-        CuentaCorrienteController cuentacontroller = new CuentaCorrienteController();
-        CredencialesController ccontroller = new CredencialesController();
         User user = formUsuario();
-        int id = userController.insertarUser(user);
-        cuentacontroller.abrirCajaAhorro(id);
+        userController.insertarUser(user);
     }
 
 

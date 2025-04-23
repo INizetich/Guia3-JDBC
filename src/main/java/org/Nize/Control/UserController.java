@@ -8,15 +8,20 @@ import java.util.List;
 
 public class UserController {
     private UserDAO userDAO;
- private CredencialesController credencialesController = new CredencialesController();
+    private CredencialesController credencialesController = new CredencialesController();
+    private CuentaCorrienteController cuentaCorrienteController = new CuentaCorrienteController();
+
     public UserController() {
         userDAO = new UserDAO();
     }
 
 
-    public int insertarUser(User user)  {
+    public int insertarUser(User user) {
         int id = userDAO.insertarUser(user);
-        credencialesController.crearCredenciales(user, id);
+        if (id != -1) {
+            credencialesController.crearCredenciales(user, id);
+            cuentaCorrienteController.abrirCajaAhorro(id);
+        }
         return id;
     }
 
