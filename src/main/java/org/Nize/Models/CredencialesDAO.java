@@ -27,16 +27,16 @@ public class CredencialesDAO {
         }
     }
 
-    public boolean iniciarSesion(String user, String contraseña) {
+    public int iniciarSesion(String user, String contraseña) {
         String sql = "SELECT * FROM credenciales WHERE username = ? AND password = ?";
         try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
             ResultSet rs = preparedStatement.executeQuery(sql);
             if(rs.next()) {
-             return true;
+             return rs.getInt("id_usuario");
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 }

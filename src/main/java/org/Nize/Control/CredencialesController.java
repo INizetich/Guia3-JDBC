@@ -17,8 +17,9 @@ public class CredencialesController {
     }
 
     public User iniciarSesion(String user, String pass){
-        if(credencialesDAO.iniciarSesion(user, pass)){
-            return userDAO.getUsuario(user);
+        int id = credencialesDAO.iniciarSesion(user, pass);
+        if(id != -1){
+            return userDAO.getUsuarioId(id);
         }
         return null;
     }

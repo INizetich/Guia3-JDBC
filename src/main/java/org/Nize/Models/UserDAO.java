@@ -1,12 +1,8 @@
 package org.Nize.Models;
 
-import javax.swing.text.DateFormatter;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class UserDAO {
     private Connection conn;
@@ -34,7 +30,7 @@ public class UserDAO {
         return -1;
     }
 
-    public User getUsuario(String dni){
+    public User getUsuarioDNI(String dni){
         String sql = "SELECT * FROM usuarios WHERE dni = " + dni;
         User user = null;
         try(Statement statement = conn.createStatement()){
@@ -49,6 +45,23 @@ public class UserDAO {
             return null;
         }
         return user;
+    }
+
+    public User getUsuarioId(int id){
+        String sql = "SELECT * FROM usuarios WHERE id_usuario = " + id;
+        User user = null;
+        try(Statement statement = conn.createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                user = new User(rs.getString("nombre"), rs.getString("apellido"), rs.getString("dni"), rs.getString("email"));
+                user.setFecha_Creacion(rs.getString("fecha_creacion"));
+                user.setID_Usuario(rs.getInt("id_usuario"));
+                return user;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private int getIdUsuario(User user){

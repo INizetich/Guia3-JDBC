@@ -4,8 +4,6 @@ package org.Nize.Control;
 import org.Nize.Models.User;
 import org.Nize.Models.UserDAO;
 
-import java.util.List;
-
 public class UserController {
     private UserDAO userDAO;
     private CredencialesController credencialesController = new CredencialesController();
@@ -26,7 +24,7 @@ public class UserController {
     }
 
     public User getUser(String dni) {
-        return userDAO.getUsuario(dni);
+        return userDAO.getUsuarioDNI(dni);
     }
 }
 
