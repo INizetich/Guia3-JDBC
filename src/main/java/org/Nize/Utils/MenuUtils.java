@@ -1,5 +1,8 @@
 package org.Nize.Utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class MenuUtils {
 
     public static void clearConsole(){
@@ -14,5 +17,12 @@ public class MenuUtils {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String fechaActual(){
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fechaActual = LocalDateTime.now();
+
+        return fechaActual.format(formateador);
     }
 }

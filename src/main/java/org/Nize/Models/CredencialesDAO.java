@@ -27,16 +27,45 @@ public class CredencialesDAO {
         }
     }
 
-    public int iniciarSesion(String user, String contraseña) {
-        String sql = "SELECT * FROM credenciales WHERE username = ? AND password = ?";
-        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
-            ResultSet rs = preparedStatement.executeQuery(sql);
+    public int iniciarSesion(String user, String pass) {
+        String sql = "SELECT * FROM credenciales WHERE username = ? AND pass = ?";
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setString(1, user);
+            preparedStatement.setString(2, pass);
+            ResultSet rs = preparedStatement.executeQuery();
+
             if(rs.next()) {
-             return rs.getInt("id_usuario");
+                return rs.getInt("id_usuario");
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return -1;
     }
+
+    public boolean cambiarPass(String pass, int id_usuario){
+        String sql = "UPDATE credenciales set pass = ? where id_usuario = ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+            preparedStatement.setString(1,pass);
+            preparedStatement.setInt(2,id_usuario);
+            preparedStatement.executeUpdate();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean validarPass(String pass, int id_usuario){
+        String sql = "SELECT * FROM credenciales WHERE pass = ? AND id_usuario = ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
+            preparedStatement.setString(1, pass);
+            preparedStatement.setInt(2, id_usuario);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

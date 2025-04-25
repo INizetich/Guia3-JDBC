@@ -10,10 +10,15 @@ public class CredencialesController {
 
     public CredencialesController(){
         credencialesDAO = new CredencialesDAO();
+        userDAO = new UserDAO();
     }
 
     public void crearCredenciales(User user, int id){
         credencialesDAO.crearCredenciales(user, id);
+    }
+
+    public boolean cambiarPass(String pass, int id_usuario){
+        return credencialesDAO.cambiarPass(pass, id_usuario);
     }
 
     public User iniciarSesion(String user, String pass){

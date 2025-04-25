@@ -10,11 +10,8 @@ public class CuentaCorriente {
     private String tiposCaja = TiposCaja.CUENTA_CORRIENTE.toString();
 
 
-    public CuentaCorriente(int id_cuenta, int id_usuario, double saldo, String fecha) {
-        this.id_cuenta = id_cuenta;
+    public CuentaCorriente(int id_usuario) {
         this.id_usuario = id_usuario;
-        this.saldo = saldo;
-        this.fecha = fecha;
     }
 
     public int getId_cuenta() {
