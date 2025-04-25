@@ -1,18 +1,17 @@
 package org.Nize.View;
 
 import org.Nize.Control.CredencialesController;
-import org.Nize.Control.CuentaCorrienteController;
 import org.Nize.Control.UserController;
-import org.Nize.Models.CredencialesDAO;
 import org.Nize.Models.User;
 import org.Nize.Utils.MenuUtils;
 
 import java.util.Scanner;
 
 public class RegisterMenu {
+private static CredencialesController credencialesController = new CredencialesController();
+private static Scanner scanner = new Scanner(System.in);
+    public static void mostrarRegister() throws InterruptedException {
 
-    public static void mostrarRegister() {
-        Scanner scanner = new Scanner(System.in);
         boolean loop = true;
         int opc = 0;
 
@@ -21,11 +20,20 @@ public class RegisterMenu {
             opc = scanner.nextInt();
             switch (opc) {
                 case 1 -> {
+                    User user = iniciarSesion();
+                    if(user !=null){
+                        MainMenu.Inicio(user);
+                    }else{
+                        System.out.println("Credenciales inválidas.");
+                    }
+                    MenuUtils.pausarMenu();
                     MenuUtils.clearConsole();
                     break;
                 }
                 case 2 -> {
-                    registarUsuario();
+                    if(registarUsuario() == -1){
+                        System.out.println("Error. Usuario Inexistente.");
+                    }
                     MenuUtils.clearConsole();
                     break;
                 }
@@ -33,6 +41,7 @@ public class RegisterMenu {
                     loop = false;
                     MenuUtils.clearConsole();
                     System.out.println("Saliendo...");
+                    MenuUtils.pausarMenu();
                     System.exit(0);
                 }
             }
@@ -41,7 +50,7 @@ public class RegisterMenu {
 
 
     private static void MenuText() {
-        System.out.println("------Gestión App------");
+        System.out.println("------Gestión App - Login------");
         System.out.println("1- Iniciar Sesión");
         System.out.println("2- Registrarse");
         System.out.println("\n0- Salir");
@@ -62,10 +71,21 @@ public class RegisterMenu {
         return new User(Nombre, Apellido, DNI, email);
     }
 
-    private static void registarUsuario() {
+    private static int registarUsuario() {
         UserController userController = new UserController();
         User user = formUsuario();
-        userController.insertarUser(user);
+        return userController.insertarUser(user);
+    }
+
+
+    private static User iniciarSesion(){
+        scanner.nextLine();
+        System.out.println("ingrese el nombre de usuario: ");
+        String nombreUsuario = scanner.nextLine();
+        System.out.println("ingrese la contraseña de usuario: ");
+        String pass = scanner.nextLine();
+        User user = credencialesController.iniciarSesion(nombreUsuario,pass);
+        return user;
     }
 
 

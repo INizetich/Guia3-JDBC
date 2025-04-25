@@ -7,4 +7,12 @@ public class MenuUtils {
             System.out.println("\n");
         }
     }
+
+    public static void pausarMenu(){
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
