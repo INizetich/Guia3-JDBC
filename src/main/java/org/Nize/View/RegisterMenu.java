@@ -2,6 +2,7 @@ package org.Nize.View;
 
 import org.Nize.Control.CredencialesController;
 import org.Nize.Control.UserController;
+import org.Nize.Exc.NoAutorizadoException;
 import org.Nize.Models.User;
 import org.Nize.Utils.MenuUtils;
 
@@ -21,14 +22,14 @@ private static Scanner scanner = new Scanner(System.in);
 
             switch (opc) {
                 case 1 -> {
-                    User user = iniciarSesion();
-                    if(user !=null){
-                        MainMenu.Inicio(user);
-                    }else{
-                        System.out.println("Credenciales inválidas.");
+                    try {
+                        User user = iniciarSesion();
+                        if (user != null) {
+                            MainMenu.Inicio(user);
+                        }
+                    }catch (NoAutorizadoException e){
+                        System.out.println(e.getMessage());
                     }
-                    MenuUtils.pausarMenu();
-                    MenuUtils.clearConsole();
                     break;
                 }
                 case 2 -> {
@@ -81,13 +82,17 @@ private static Scanner scanner = new Scanner(System.in);
     }
 
 
-    private static User iniciarSesion(){
+    private static User iniciarSesion() throws NoAutorizadoException {
         scanner.nextLine();
         System.out.println("ingrese el nombre de usuario: ");
         String nombreUsuario = scanner.nextLine();
         System.out.println("ingrese la contraseña de usuario: ");
         String pass = scanner.nextLine();
         User user = credencialesController.iniciarSesion(nombreUsuario,pass);
+
+        if (user == null) {
+            throw new NoAutorizadoException("No esta autorizado a ingresar a la app, intente de nuevo con los datos ingresados.");
+        }
         return user;
     }
 
