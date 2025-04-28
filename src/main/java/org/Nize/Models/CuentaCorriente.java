@@ -14,6 +14,14 @@ public class CuentaCorriente {
         this.id_usuario = id_usuario;
     }
 
+    public CuentaCorriente(int id_cuenta, int id_usuario, double saldo, String fecha, String tiposCaja) {
+        this.id_cuenta = id_cuenta;
+        this.id_usuario = id_usuario;
+        this.saldo = saldo;
+        this.fecha = fecha;
+        this.tiposCaja = tiposCaja;
+    }
+
     public int getId_cuenta() {
         return id_cuenta;
     }
@@ -57,12 +65,11 @@ public class CuentaCorriente {
 
     @Override
     public String toString() {
-        return "CuentaCorriente{" +
-                "id_cuenta=" + id_cuenta +
-                ", id_usuario=" + id_usuario +
-                ", saldo=" + saldo +
-                ", fecha='" + fecha + '\'' +
-                ", tiposCaja='" + tiposCaja + '\'' +
-                '}';
+        return "id_cuenta=" + id_cuenta + "\n" +
+                "id_usuario=" + id_usuario + "\n" +
+                "saldo=" + saldo + "\n" +
+                "fecha='" + fecha + "'\n" +
+                "tiposCaja='" + tiposCaja + "'\n";
     }
+
 }

@@ -25,4 +25,23 @@ public class MenuUtils {
 
         return fechaActual.format(formateador);
     }
+
+
+    public static void mostrarCerrando() {
+        String[] animacion = {"|", "/", "-", "\\"};  // Barras giratorias
+        int i = 0;
+
+        // Simula el proceso de carga
+
+        try {
+            for (int j = 0; j < 10; j++) {  // 10 ciclos de la animación
+                System.out.print("saliendo-> "+animacion[i] + "\r");  // Sobrescribe la línea anterior
+                i = (i + 1) % animacion.length;  // Cambia al siguiente símbolo en el arreglo
+                Thread.sleep(250);  // Pausa de 250ms entre cada cambio
+            }
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

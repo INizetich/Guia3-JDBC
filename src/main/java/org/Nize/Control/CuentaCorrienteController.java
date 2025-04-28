@@ -13,4 +13,9 @@ public class CuentaCorrienteController {
     public void abrirCajaAhorro(int id_usuario){
         ccdao.abrirCajaAhorro(id_usuario);
     }
+
+
+    public CuentaCorriente mostrarCuentaCorriente(int id_usuario){
+        return ccdao.mostrarCajaAhorro(id_usuario);
+    }
 }

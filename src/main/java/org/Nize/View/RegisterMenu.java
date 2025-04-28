@@ -18,6 +18,7 @@ private static Scanner scanner = new Scanner(System.in);
         do {
             MenuText();
             opc = scanner.nextInt();
+
             switch (opc) {
                 case 1 -> {
                     User user = iniciarSesion();
@@ -40,7 +41,9 @@ private static Scanner scanner = new Scanner(System.in);
                 case 0 -> {
                     loop = false;
                     MenuUtils.clearConsole();
-                    System.out.println("Saliendo...");
+
+                    MenuUtils.mostrarCerrando();
+
                     MenuUtils.pausarMenu();
                     System.exit(0);
                 }

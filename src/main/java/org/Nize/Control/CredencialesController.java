@@ -28,4 +28,8 @@ public class CredencialesController {
         }
         return null;
     }
+
+    public boolean validarPassword(String pass, int id_usuario){
+        return credencialesDAO.validarPass(pass, id_usuario);
+    }
 }

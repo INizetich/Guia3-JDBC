@@ -1,6 +1,8 @@
 package org.Nize.View;
 
+import org.Nize.Control.CredencialesController;
 import org.Nize.Control.CuentaCorrienteController;
+import org.Nize.Models.CuentaCorriente;
 import org.Nize.Models.User;
 import org.Nize.Utils.MenuUtils;
 
@@ -18,7 +20,8 @@ public class MainMenu {
             opc = scanner.nextInt();
 
             switch (opc) {
-                case 1 -> {
+                case 1 ->{
+                    mostrarCuentaCorriente(user);
                     break;
                 }
                 case 2 -> {
@@ -26,6 +29,12 @@ public class MainMenu {
                     break;
                 }
                 case 3 -> {
+
+                    break;
+                }
+
+                case 4 -> {
+                    cambiarPassword(user);
                     break;
                 }
                 case 0 -> {
@@ -60,6 +69,41 @@ public class MainMenu {
         CuentaCorrienteController cuentaCorrienteController = new CuentaCorrienteController();
         cuentaCorrienteController.abrirCuentaCorriente(user.getID_Usuario());
     }
+
+    private static void mostrarCuentaCorriente(User user){
+        CuentaCorrienteController cuentaCorrienteController = new CuentaCorrienteController();
+        CuentaCorriente cuentaCorriente = cuentaCorrienteController.mostrarCuentaCorriente(user.getID_Usuario());
+        System.out.println("DATOS DE LA CUENTA CORRIENTE: ");
+        System.out.println(cuentaCorriente);
+    }
+
+
+    private static void cambiarPassword(User user){
+        CredencialesController credencialesController = new CredencialesController();
+        System.out.println("ingrese su contraseña actual: ");
+        scanner.nextLine();
+        String actualPassword = scanner.nextLine();
+      boolean validacion =  credencialesController.validarPassword(actualPassword,user.getID_Usuario());
+
+      if(validacion){
+          System.out.println("ingrese su nueva password: ");
+          String newPassword = scanner.nextLine();
+         boolean exito = credencialesController.cambiarPass(newPassword,user.getID_Usuario());
+
+         if(exito){
+             System.out.println("password actualizada correctamente.");
+         }else {
+             System.out.println("Ocurrio un error al cambiar el password.");
+         }
+      }else {
+          System.out.println("Password incorrecta, por favor introduce su contraseña actual para continuar.");
+      }
+
+
+    }
+
+
+
 
 
 }

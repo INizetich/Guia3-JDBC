@@ -61,7 +61,8 @@ public class CredencialesDAO {
         try(PreparedStatement preparedStatement = conn.prepareStatement(sql)){
             preparedStatement.setString(1, pass);
             preparedStatement.setInt(2, id_usuario);
-
+              ResultSet rs = preparedStatement.executeQuery();
+              return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }

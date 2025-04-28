@@ -2,6 +2,7 @@ package org.Nize.Models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +41,23 @@ public class CuentaCorrienteDAO {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+
+    public CuentaCorriente mostrarCajaAhorro(int id_usuario){
+        String sql = "select * from cuentas where id_usuario=?";
+        CuentaCorriente cuentaCorriente = null;
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setInt(1,id_usuario);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if(rs.next()){
+                cuentaCorriente = new CuentaCorriente(rs.getInt("id_cuenta"),rs.getInt("id_usuario"),rs.getDouble("saldo"),rs.getString("fecha_creacion"),rs.getString("tipo"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return cuentaCorriente;
     }
 
 
